@@ -11,6 +11,7 @@ namespace ANCD.IoC
         {
             services.ConfigureMediator();
             services.ConfigureMapper();
+            services.ConfigureRepositories();
 
             return services;
         }
