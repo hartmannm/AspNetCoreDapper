@@ -19,7 +19,7 @@ namespace ANCD.API.Controllers
         /// <summary>
         /// Register a Doctor.
         /// </summary>
-        /// <param name="request">Doctor's data</param>
+        /// <param name="command">Doctor's data</param>
         /// <returns>Registered Doctor's data</returns>
         /// <remarks>
         /// Sample request:
