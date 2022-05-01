@@ -1,4 +1,6 @@
-﻿using ANCD.IoC.Mediator;
+﻿using ANCD.IoC.Data;
+using ANCD.IoC.Map;
+using ANCD.IoC.Mediator;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ANCD.IoC
@@ -8,6 +10,7 @@ namespace ANCD.IoC
         public static IServiceCollection AddInfraConfiguration(this IServiceCollection services)
         {
             services.ConfigureMediator();
+            services.ConfigureMapper();
 
             return services;
         }
