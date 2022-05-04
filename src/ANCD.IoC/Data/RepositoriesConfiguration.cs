@@ -10,6 +10,7 @@ namespace ANCD.IoC.Data
     {
         public static IServiceCollection ConfigureRepositories(this IServiceCollection services)
         {
+            services.AddSingleton<IDbContext, DbContext>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<IDataManager, DataManager>();
 
