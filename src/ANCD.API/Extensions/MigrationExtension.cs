@@ -9,7 +9,7 @@ namespace ANCD.API.Extensions
             using var scope = app.ApplicationServices.CreateScope();
             var runner = scope.ServiceProvider.GetService<IMigrationRunner>();
             runner.ListMigrations();
-            runner.MigrateUp(20220504210000);
+            runner.MigrateUp(20220504220000);
 
             return app;
         }
