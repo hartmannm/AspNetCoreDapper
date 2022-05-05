@@ -9,7 +9,7 @@ namespace ANCD.Domain.Entities.DomainEntities
         public Email Email { get; private set; }
 
 
-        public Person(string firstName, string lastName, string email)
+        public Person(string firstName, string lastName, string email) : base()
         {
             Name = new Name(firstName: firstName, lastName: lastName);
             Email = new Email(email);

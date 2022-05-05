@@ -1,19 +1,33 @@
-﻿using ANCD.Application.Data.Repositories;
+﻿using ANCD.Application.Data;
+using ANCD.Application.Data.Repositories;
 using ANCD.Domain.Entities;
-using ANCD.Domain.Entities.DomainEntities.Enums;
+using ANCD.Infra.Data.SQLParameters;
+using Dapper;
 
 namespace ANCD.Infra.Data.Repositories
 {
-    public class DoctorRepository : IDoctorRepository
+    public class DoctorRepository : AbstractRepository, IDoctorRepository
     {
-        public Task CreateAsync(Doctor doctor)
+        public DoctorRepository(IDbContext dbContext) : base(dbContext)
         {
-            throw new NotImplementedException();
         }
 
-        public Task<bool> ExistsByEmailOrCRMAsync(string email, EUF crmUf, long crmNumber)
+        public async Task<bool> CreateAsync(Doctor doctor)
         {
-            throw new NotImplementedException();
+            var parameters = new RegisterDoctorParameters(doctor);
+            var sql = @"INSERT INTO Doctors (Id, FirstName, LastName, Email, CrmUf, CrmNumber)
+                        VALUES (@Id, @FirstName, @LastName, @Email, @CrmUf, @CrmNumber)";
+
+            return await ExecuteInTransactionAsync(sql, parameters);
+        }
+
+        public async Task<bool> ExistsByEmailOrCRMAsync(string email, string crmUf, long crmNumber)
+        {
+            var parameters = new DoctorExistsByEmailOrCRMParameters(email, crmUf, crmNumber);
+            var sql = @"SELECT 1 FROM Doctors 
+                        WHERE Email = @email OR (Crmuf = @crmUf AND CrmNumber = @crmNumber)";
+
+            return await GetConnection().ExecuteScalarAsync<bool>(sql, parameters);
         }
     }
 }
