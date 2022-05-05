@@ -11,7 +11,7 @@ namespace ANCD.Infra.Data
 
         public DbContext(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = configuration.GetConnectionString("DatabaseConnection");
         }
 
         public IDbConnection GetConnection() => new SqlConnection(_connectionString);
