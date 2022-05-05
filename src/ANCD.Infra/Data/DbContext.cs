@@ -14,6 +14,14 @@ namespace ANCD.Infra.Data
             _connectionString = configuration.GetConnectionString("DatabaseConnection");
         }
 
-        public IDbConnection GetConnection() => new SqlConnection(_connectionString);
+        public IDbConnection GetConnection()
+        {
+            var connection = new SqlConnection(_connectionString);
+
+            if(connection.State is ConnectionState.Closed)
+                connection.Open();
+
+            return connection;
+        }
     }
 }
