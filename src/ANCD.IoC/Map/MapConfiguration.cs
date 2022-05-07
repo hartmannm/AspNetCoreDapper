@@ -21,6 +21,8 @@ namespace ANCD.IoC.Map
             var config = new MapperConfiguration(mc =>
             {
                 mc.AddProfile<DoctorProfile>();
+                mc.AddProfile<PatientProfile>();
+                mc.AddProfile<MedicalExamProfile>();
             });
             config.AssertConfigurationIsValid();
 

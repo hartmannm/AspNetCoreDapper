@@ -29,5 +29,14 @@ namespace ANCD.Infra.Data.Repositories
 
             return await GetConnection().ExecuteScalarAsync<bool>(sql, parameters);
         }
+
+        public async Task<Doctor> GetByIdAsync(Guid id)
+        {
+            var parameters = new { Id = id };
+            var sql = @"SELECT Id, FirstName, LastName, Email, CrmUf, CrmNumber FROM Doctors
+                        WHERE Id = @Id";
+
+            return await GetConnection().QuerySingleOrDefaultAsync<Doctor>(sql, parameters);
+        }
     }
 }

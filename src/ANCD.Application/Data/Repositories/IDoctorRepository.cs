@@ -7,5 +7,7 @@ namespace ANCD.Application.Data.Repositories
         Task<bool> CreateAsync(Doctor doctor);
 
         Task<bool> ExistsByEmailOrCRMAsync(string email, string crmUf, long crmNumber);
+
+        Task<Doctor> GetByIdAsync(Guid id);
     }
 }

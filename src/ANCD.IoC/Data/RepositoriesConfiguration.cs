@@ -15,6 +15,8 @@ namespace ANCD.IoC.Data
             services.AddSingleton<IDbContext, DbContext>();
             services.ConfigureMigrations(configuration);
             services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IMedicalExamRepository, MedicalExamRepository>();
             services.AddScoped<IDataManager, DataManager>();
 
             return services;
