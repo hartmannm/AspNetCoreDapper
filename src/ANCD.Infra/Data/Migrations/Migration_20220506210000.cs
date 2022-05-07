@@ -7,7 +7,8 @@ namespace ANCD.Infra.Data.Migrations
     {
         public override void Down()
         {
-            Delete.Table("Patients");
+            Alter.Table("Doctors")
+                .AlterColumn("Email").AsString(255).NotNullable();
         }
 
         public override void Up()
