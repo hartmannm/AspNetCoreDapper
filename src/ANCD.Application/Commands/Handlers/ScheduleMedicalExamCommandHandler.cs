@@ -29,7 +29,7 @@ namespace ANCD.Application.Commands.Handlers
             if (doctorOrPatientDontExistsValidationResult.Any()) return CommandResult.Fail(doctorOrPatientDontExistsValidationResult);
 
             var exam = new MedicalExam(command.Date, doctor, patient);
-            var isMedicalExamScheduled = await _medicalExamRepository.Schedule(exam);
+            var isMedicalExamScheduled = await _medicalExamRepository.ScheduleAsync(exam);
 
             return isMedicalExamScheduled ? CommandResult.Success() : CommandResult.Fail("Erro ao agendar exame médico");
         }
