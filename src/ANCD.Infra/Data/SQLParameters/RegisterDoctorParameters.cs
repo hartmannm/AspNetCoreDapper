@@ -4,7 +4,7 @@ namespace ANCD.Infra.Data.SQLParameters
 {
     internal sealed record RegisterDoctorParameters
     {
-        public string Id { get; init; }
+        public Guid Id { get; init; }
 
         public string FirstName { get; init; }
 
@@ -18,12 +18,12 @@ namespace ANCD.Infra.Data.SQLParameters
 
         public RegisterDoctorParameters(Doctor doctor)
         {
-            Id = doctor.Id.ToString();
-            FirstName = doctor.Name.FirstName;
-            LastName = doctor.Name.LastName;
-            Email = doctor.Email.Address;
-            CrmUf = doctor.CRM.Uf.ToString();
-            CrmNumber = doctor.CRM.Number;
+            Id = doctor.Id;
+            FirstName = doctor.FirstName;
+            LastName = doctor.LastName;
+            Email = doctor.Email;
+            CrmUf = doctor.CRMUf.ToString();
+            CrmNumber = doctor.CRMNumber;
         }
     }
 }

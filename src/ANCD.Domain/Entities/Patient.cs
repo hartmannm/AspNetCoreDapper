@@ -8,6 +8,11 @@ namespace ANCD.Domain.Entities
 
         public ICollection<MedicalExam> MedicalExams { get; private set; }
 
+        private Patient() : base(null, null, null)
+        {
+            MedicalExams = new List<MedicalExam>();
+        }
+
         public Patient(string firstName, string lastName, string email, DateTime birthDate)
             : base(firstName, lastName, email)
         {

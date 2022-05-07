@@ -1,19 +1,26 @@
 ﻿using ANCD.Domain.Entities.DomainEntities;
 using ANCD.Domain.Entities.DomainEntities.Enums;
-using ANCD.Domain.Entities.ValueObjects;
 
 namespace ANCD.Domain.Entities
 {
     public class Doctor : Person, IAggregateRoot
     {
-        public CRMRegister CRM { get; private set; }
+        public EUF CRMUf { get; init; }
+
+        public long CRMNumber { get; init; }
 
         public ICollection<MedicalExam> MedicalExams { get; private set; }
 
-        public Doctor(string firstName, string lastName, string email, EUF CRMUF, long CRMNumber)
+        private Doctor() : base(null, null, null)
+        {
+            MedicalExams = new List<MedicalExam>();
+        }
+
+        public Doctor(string firstName, string lastName, string email, EUF CrmUf, long CrmNumber)
             : base(firstName, lastName, email)
         {
-            CRM = new CRMRegister(CRMUF, CRMNumber);
+            CRMUf = CrmUf;
+            CRMNumber = CrmNumber;
             MedicalExams = new List<MedicalExam>();
         }
     }

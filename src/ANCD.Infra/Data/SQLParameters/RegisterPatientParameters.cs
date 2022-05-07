@@ -4,7 +4,7 @@ namespace ANCD.Infra.Data.SQLParameters
 {
     internal sealed record RegisterPatientParameters
     {
-        public string Id { get; init; }
+        public Guid Id { get; init; }
 
         public string FirstName { get; init; }
 
@@ -16,10 +16,10 @@ namespace ANCD.Infra.Data.SQLParameters
 
         public RegisterPatientParameters(Patient patient)
         {
-            Id = patient.Id.ToString();
-            FirstName = patient.Name.FirstName;
-            LastName = patient.Name.LastName;
-            Email = patient.Email.Address;
+            Id = patient.Id;
+            FirstName = patient.FirstName;
+            LastName = patient.LastName;
+            Email = patient.Email;
             BirthDate = patient.BirthDate;
         }
     }
