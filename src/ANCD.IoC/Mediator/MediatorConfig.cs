@@ -18,6 +18,7 @@ namespace ANCD.IoC.Mediator
             services.AddScoped<IRequestHandler<RegisterDoctorCommand, CommandResult>, RegisterDoctorCommandHandler>();
             services.AddScoped<IRequestHandler<RegisterPatientCommand, CommandResult>, RegisterPatientCommandHandler>();
             services.AddScoped<IRequestHandler<ScheduleMedicalExamCommand, CommandResult>, ScheduleMedicalExamCommandHandler>();
+            services.AddScoped<IRequestHandler<AccomplishMedicalExamCommand, CommandResult>, AccomplishMedicalExamCommandHandler>();
 
             return services;
         }

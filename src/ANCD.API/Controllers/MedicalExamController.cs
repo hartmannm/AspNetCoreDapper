@@ -43,5 +43,28 @@ namespace ANCD.API.Controllers
 
             return DefaultResponse(result, HttpStatusCode.Created);
         }
+
+        /// <summary>
+        /// Set a medical exam as accomplished.
+        /// </summary>
+        /// <param name="id">Medical exam Id</param>
+        /// <returns>Ok if medical exam was set as accomplished</returns>
+        /// <remarks>
+        /// Sample request:
+        ///     
+        ///     POST /7447b0b9-bc85-4ecf-b1f3-c53a7a4f201f/accomplish
+        /// </remarks>
+        /// <response code="200">Returns if medical exam was set as accomplished</response>
+        /// <response code="400">Returns a list of erros</response>
+        [HttpPost("{id:guid}/accomplish")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> AccomplishMedicalExam([FromRoute] Guid id)
+        {
+            var command = new AccomplishMedicalExamCommand(id);
+            var result = await _mediator.SendCommand(command);
+
+            return DefaultResponse(result, HttpStatusCode.OK);
+        }
     }
 }

@@ -9,5 +9,9 @@ namespace ANCD.Application.Data.Repositories
         Task<IEnumerable<MedicalExam>> GetMedicalExamsByDateAndDoctorIdAsync(DateTime date, Guid doctorId);
 
         Task<IEnumerable<MedicalExam>> GetMedicalExamsByDateAndPatientIdAsync(DateTime date, Guid patientId);
+
+        Task<MedicalExam> GetByIdAsync(Guid id);
+
+        Task<bool> Update(MedicalExam exam);
     }
 }

@@ -39,5 +39,37 @@ namespace ANCD.Infra.Data.Repositories
 
             return await GetConnection().QueryAsync<MedicalExam>(sql, parameters);
         }
+
+        public async Task<MedicalExam> GetByIdAsync(Guid id)
+        {
+            var parameters = new { Id = id };
+            var sql = @"SELECT me.Id, me.[Date], me.DoctorId, me.PatientId, me.[Status], 
+                            d.Id, d.FirstName, d.LastName, d.Email, d.CrmUf, d.CrmNumber, d.CrmNumber,  
+                            p.Id, p.FirstName, p.LastName, p.Email, p.BirthDate  
+                        FROM MedicalExams me
+                            INNER JOIN Doctors d 
+                                ON me.DoctorId = d.Id
+                            INNER JOIN Patients p
+                                ON me.PatientId = p.Id
+                        WHERE me.Id = @Id";
+            var medicalExams = await GetConnection().QueryAsync<MedicalExam, Doctor, Patient, MedicalExam>(sql, (medicalExam, doctor, patient) =>
+            {
+                medicalExam.SetDoctor(doctor);
+                medicalExam.SetPatient(patient);
+                return medicalExam;
+            },
+            parameters);
+
+            return medicalExams.FirstOrDefault();
+        }
+
+        public async Task<bool> Update(MedicalExam exam)
+        {
+            var parameters = new UpdateMedicalExamParameters(exam);
+            var sql = @"UPDATE MedicalExams SET [Date] = @Date, DoctorId = @DoctorId, PatientId = @Patientid, Status = @Status
+                        WHERE Id = @Id";
+
+            return await ExecuteInTransactionAsync(sql, parameters);
+        }
     }
 }

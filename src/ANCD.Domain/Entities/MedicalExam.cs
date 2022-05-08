@@ -32,12 +32,16 @@ namespace ANCD.Domain.Entities
 
         public bool IsAcomplished() => Status.Equals(EStatus.Accomplished);
 
-        public void Accomplish() => Status.Equals(EStatus.Accomplished);
+        public void Accomplish() => Status = EStatus.Accomplished;
 
         public bool HasDateConflict(MedicalExam other)
         {
             var examEndDate = Date.AddMinutes(30);
             return Date.Equals(other.Date) || (other.Date > Date && other.Date < examEndDate);
         }
+
+        public void SetDoctor(Doctor doctor) => Doctor = doctor;
+
+        public void SetPatient(Patient patient) => Patient = patient;
     }
 }
