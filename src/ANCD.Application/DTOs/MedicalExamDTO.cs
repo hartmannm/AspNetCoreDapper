@@ -4,12 +4,12 @@
     {
         public Guid Id { get; init; }
 
-        public Guid DoctorId { get; init; }
-
-        public Guid PatientId { get; init; }
-
         public string Status { get; init; }
 
         public DateTime Date { get; init; }
+
+        public DoctorDTO Doctor { get; init; }
+
+        public PatientDTO Patient { get; init; }
     }
 }

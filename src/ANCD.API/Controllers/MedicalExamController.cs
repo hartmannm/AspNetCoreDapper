@@ -1,5 +1,7 @@
 ﻿using ANCD.Application.Commands;
+using ANCD.Application.DTOs;
 using ANCD.Application.Mediator;
+using ANCD.Application.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Net.Mime;
@@ -65,6 +67,33 @@ namespace ANCD.API.Controllers
             var result = await _mediator.SendCommand(command);
 
             return DefaultResponse(result, HttpStatusCode.OK);
+        }
+
+        /// <summary>
+        /// Search by a medical exam with the specified Id.
+        /// </summary>
+        /// <param name="id">Medical exam Id</param>
+        /// <returns>Medical exam data</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     GET /medical-exam/6522d02c-c12e-413e-ae3f-30dd549aacdd
+        ///     
+        /// </remarks>
+        /// <response code="200">Returns the medical exam data</response>
+        /// <response code="204">Data not found</response>
+        /// <response code="400">Returns a list of erros</response>
+        [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(MedicalExamDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var query = new GetMedicalExamByIdQuery(id);
+            var result = await _mediator.SendQuery<GetMedicalExamByIdQuery, MedicalExamDTO>(query);
+            var statusCode = result.Data is null ? HttpStatusCode.NoContent : HttpStatusCode.OK;
+
+            return DefaultResponse(result, statusCode);
         }
     }
 }
