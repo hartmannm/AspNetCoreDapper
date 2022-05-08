@@ -1,5 +1,6 @@
 ﻿using ANCD.Application.Mediator;
 using ANCD.Application.Messages.CommandsQueries;
+using ANCD.Application.Messages.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -21,6 +22,14 @@ namespace ANCD.API.Controllers
                 return BadRequest(result.Errors);
 
             return ApiDefaultResponse<object>(null, statusCode);
+        }
+
+        protected IActionResult DefaultResponse<T>(QueryResult<T> result, HttpStatusCode statusCode)
+        {
+            if (result.IsSuccess is false)
+                return BadRequest(result.Errors);
+
+            return ApiDefaultResponse<object>(result.Data, statusCode);
         }
 
         private IActionResult ApiDefaultResponse<T>(T result, HttpStatusCode statusCode)
