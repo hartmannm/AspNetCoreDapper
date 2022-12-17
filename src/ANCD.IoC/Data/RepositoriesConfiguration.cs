@@ -3,6 +3,7 @@ using ANCD.Application.Data.Repositories;
 using ANCD.Infra.Data;
 using ANCD.Infra.Data.Migrations;
 using ANCD.Infra.Data.Repositories;
+using ANCD.Infra.Data.Repositories.Cache;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,8 +15,10 @@ namespace ANCD.IoC.Data
         {
             services.AddSingleton<IDbContext, DbContext>();
             services.ConfigureMigrations(configuration);
-            services.AddScoped<IDoctorRepository, DoctorRepository>();
-            services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<DoctorRepository>();
+            services.AddScoped<IDoctorRepository, CacheDoctorRepositoryDecorator<DoctorRepository>>();
+            services.AddScoped<PatientRepository>();
+            services.AddScoped<IPatientRepository, CachePatientRepositoryDecorator<PatientRepository>>();
             services.AddScoped<IMedicalExamRepository, MedicalExamRepository>();
             services.AddScoped<IDataManager, DataManager>();
 

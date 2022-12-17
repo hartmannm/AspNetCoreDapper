@@ -22,7 +22,7 @@ namespace ANCD.Application.Commands.Handlers
             if (medicalExam.IsAcomplished()) return CommandResult.Fail("Exame médico já está concluído");
 
             medicalExam.Accomplish();
-            var isMedicalExamAccomplished = await _medicalExamRepository.Update(medicalExam);
+            var isMedicalExamAccomplished = await _medicalExamRepository.UpdateAsync(medicalExam);
 
             return isMedicalExamAccomplished ? CommandResult.Success() : CommandResult.Fail("Erro ao concluir exame médico");
         }

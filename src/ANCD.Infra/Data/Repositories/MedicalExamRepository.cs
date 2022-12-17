@@ -63,7 +63,7 @@ namespace ANCD.Infra.Data.Repositories
             return medicalExams.FirstOrDefault();
         }
 
-        public async Task<bool> Update(MedicalExam exam)
+        public async Task<bool> UpdateAsync(MedicalExam exam)
         {
             var parameters = new UpdateMedicalExamParameters(exam);
             var sql = @"UPDATE MedicalExams SET [Date] = @Date, DoctorId = @DoctorId, PatientId = @Patientid, Status = @Status

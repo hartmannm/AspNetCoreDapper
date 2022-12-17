@@ -3,6 +3,8 @@ using ANCD.Application.Data.Repositories;
 using ANCD.Application.DTOs;
 using ANCD.Application.Map;
 using ANCD.Application.Messages.Queries;
+using ANCD.Domain.Entities;
+using ANCD.Domain.Services.Interfaces;
 
 namespace ANCD.Application.Queries.Handlers
 {

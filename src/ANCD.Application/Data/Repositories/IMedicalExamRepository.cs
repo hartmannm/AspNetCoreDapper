@@ -12,6 +12,6 @@ namespace ANCD.Application.Data.Repositories
 
         Task<MedicalExam> GetByIdAsync(Guid id);
 
-        Task<bool> Update(MedicalExam exam);
+        Task<bool> UpdateAsync(MedicalExam exam);
     }
 }
