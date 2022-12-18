@@ -10,12 +10,17 @@ services:
       ACCEPT_EULA: "Y"
     volumes: 
       - sqldata:/var/lib/mssqlql/data
+  redis:
+    image: redis:alpine3.17
+    ports:
+      - "6379:6379"
+    volumes: 
+      - cache:/data
   dapper-api:
     image: realdavis/aspnetcore-dapper:latest
     build:
         context: ../src
         dockerfile: ANCD.API/Dockerfile
-    restart: always
     ports:
       - "7128:7128"            
     environment:
@@ -23,6 +28,8 @@ services:
         - ASPNETCORE_URLS=http://*:7128
     depends_on:
       - sql-server
+      - redis
 
 volumes:
   sqldata:
+  cache:
