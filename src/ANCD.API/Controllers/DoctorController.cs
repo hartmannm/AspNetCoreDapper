@@ -29,9 +29,9 @@ namespace ANCD.API.Controllers
         ///     POST /doctor
         ///     {
         ///         "firstName": "John",
-        ///         "lastName: "Doe",
+        ///         "lastName": "Doe",
         ///         "email": "johndoe@example.com",
-        ///         "crmUf": "rs"
+        ///         "crmUf": "rs",
         ///         "crmNumber": 123456
         ///     }
         ///     

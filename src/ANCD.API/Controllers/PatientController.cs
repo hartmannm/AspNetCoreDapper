@@ -29,7 +29,7 @@ namespace ANCD.API.Controllers
         ///     POST /patient
         ///     {
         ///         "firstName": "John",
-        ///         "lastName: "Doe",
+        ///         "lastName": "Doe",
         ///         "email": "johndoe@example.com",
         ///         "birthDate": "1993-01-13T23:00:32.012Z"
         ///     }
